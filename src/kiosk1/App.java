@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         // 햄버거 메뉴 리스트 정의
         String[] menuItems = {
                 "ShackBurger  | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거",
@@ -23,8 +25,6 @@ public class App {
             System.out.println("0. 종료          | 종료");
 
             // 메뉴 입력 받기
-            Scanner scanner = new Scanner(System.in);
-
             System.out.print("원하는 메뉴를 입력하십시오: ");
             int choice = scanner.nextInt();
 
