@@ -38,7 +38,7 @@ public class Kiosk {
                 // 메뉴판 출력
                 System.out.println("[ " + menuList.get(choiceCategory-1).name + " MENU ]");
                 menuList.get(choiceCategory-1).printMenu(); // 카테고리는 1번부터 시작
-                System.out.println("0. 뒤로가기        | 종료");
+                System.out.println("0. 뒤로가기       | 뒤로가기");
             } else {
                 System.out.println("존재하지 않는 카테고리 입니다.");
                 continue;
