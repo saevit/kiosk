@@ -8,6 +8,7 @@ public class Kiosk {
     // 속성
     private List<Menu> menuList;
     private List<Cart> cartList;
+    int totalPrice;
 
     // 생성자
     public Kiosk (List<Menu> menuList) {
@@ -20,6 +21,7 @@ public class Kiosk {
 
         // 새 장바구니 생성
         cartList = new ArrayList<>();
+        totalPrice = 0;
 
         while (true) {
             System.out.println("============================");
@@ -51,14 +53,29 @@ public class Kiosk {
             }
             else if (choiceCategory <= menuList.size()) {
                 // 메뉴판 출력
-                System.out.println("[ " + menuList.get(choiceCategory-1).getName() + " MENU ]");
+                System.out.println("\n[ " + menuList.get(choiceCategory-1).getName() + " MENU ]");
                 menuList.get(choiceCategory-1).printMenu(); // 카테고리는 1번부터 시작
                 System.out.println("0. 뒤로가기       | 뒤로가기");
             }
             else if ((cartList.size() > 0) && (choiceCategory == menuList.size()+1)) {
                 // 장바구니 주문
-                System.out.println("주문");
-                break;
+                // 주문 내역 및 총 금액 출력
+                System.out.println("[ Orders ]");
+                for (Cart c : cartList) {
+                    System.out.println(c);
+                }
+                System.out.println("[ Total ]");
+                System.out.println("W " + totalPrice);
+
+                // 주문 여부 확인
+                System.out.println("1. 주문        2. 뒤로가기");
+                int choiceOrder = scanner.nextInt();
+
+                if (choiceOrder == 1) {
+                    System.out.println("주문이 완료되었습니다.");
+                    cartList.clear();
+                }
+                continue;
             }
             else if ((cartList.size() > 0) && (choiceCategory == menuList.size()+2)) {
                 // 장바구니 주문 취소
@@ -104,6 +121,9 @@ public class Kiosk {
                     if (isExist == false) {
                         cartList.add(new Cart(menuItem, 1));
                     }
+
+                    // 현재까지 총 주문 금액 합산
+                    totalPrice += menuItem.getPrice();
 
                     // 추가된 메뉴 확인 및 현재 장바구니 출력
                     System.out.println(menuItem.getName() + "가 추가되었습니다.");
