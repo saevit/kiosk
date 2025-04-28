@@ -15,13 +15,8 @@ public class Cart {
     }
 
     // 기능
-
-
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "menuItme=" + menuItme +
-                ", quantity=" + quantity +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return menuItme.getName() + "  W " + menuItme.getPrice() + "  ×" + quantity;
+//    }
 }

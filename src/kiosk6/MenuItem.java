@@ -14,9 +14,9 @@ public class MenuItem {
     }
 
     //기능
-    String getName() {
-        return this.name;
-    }
+    String getName() { return this.name; }
+
+    int getPrice() { return this.price; }
 
     @Override
     public String toString() {

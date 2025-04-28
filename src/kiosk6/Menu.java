@@ -14,7 +14,6 @@ public class Menu {
     }
 
     // 기능
-    // 카테고리 이름 출력
     public String getName() {
         return name;
     }
