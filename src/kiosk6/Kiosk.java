@@ -89,11 +89,29 @@ public class Kiosk {
 
                 if (choiceAdd == 1){
                     // 장바구니에 추가
-                    MenuItem menuitem = menuList.get(choiceCategory-1).getMenu().get(choiceItem - 1);
-                    cartList.add(new Cart(menuitem, 1));
+                    MenuItem menuItem = menuList.get(choiceCategory-1).getMenu().get(choiceItem - 1);
 
-                    // 추가된 메뉴 확인
-                    System.out.println(cartList.get(cartList.size()-1).menuItme.getName() + "가 추가되었습니다.");
+                    // 이미 장바구니에 있다면 수량을 늘림
+                    boolean isExist = false;
+                    for (Cart c : cartList) {
+                        if (c.getMenuItem().equals(menuItem)) {
+                            c.quantity += 1;
+                            isExist = true;
+                        }
+                    }
+
+                    // 장바구니에 없다면 새롭게 추가
+                    if (isExist == false) {
+                        cartList.add(new Cart(menuItem, 1));
+                    }
+
+                    // 추가된 메뉴 확인 및 현재 장바구니 출력
+                    System.out.println(menuItem.getName() + "가 추가되었습니다.");
+
+                    System.out.println("[ Cart ]");
+                    for (Cart c : cartList) {
+                        System.out.println(c);
+                    }
                 } else {
                     System.out.println("취소되었습니다.");
                 }
