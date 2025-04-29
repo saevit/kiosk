@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Cart {
     // 속성
-    List<CartItem> cart;
-    int totalPrice;
+    private List<CartItem> cart;
+    private int totalPrice;
 
     // 생성자
     Cart() {
@@ -25,7 +25,7 @@ public class Cart {
         boolean isExist = false;
         for (CartItem c : cart) {
             if (c.getMenuItem().equals(item)) {
-                c.quantity += 1;
+                c.addQuantity(1);
                 isExist = true;
             }
         }

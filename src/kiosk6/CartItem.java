@@ -2,8 +2,8 @@ package kiosk6;
 
 public class CartItem {
     // 속성 - MenuItem (메뉴명, 가격 정보), 수량
-    MenuItem menuItem;
-    int quantity;
+    private MenuItem menuItem;
+    private int quantity;
 
     // 생성자
     CartItem(MenuItem menuItem, int quantity) {
@@ -13,6 +13,8 @@ public class CartItem {
 
     // 기능
     MenuItem getMenuItem() { return this.menuItem; }
+
+    void addQuantity(int num) { quantity += num; }
 
     @Override
     public String toString() {
