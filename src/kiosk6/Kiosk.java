@@ -79,11 +79,37 @@ public class Kiosk {
             }
             else if ((cartList.size() > 0) && (choiceCategory == menuList.size()+2)) {
                 // 장바구니 주문 취소
-                System.out.println("취소");
+                // 주문 내역 및 총 금액 출력
+                System.out.println("[ Orders ]");
+                for (int i = 0; i < cartList.size(); i++) {
+                    System.out.println((i + 1) + ". " + cartList.get(i)); // 메뉴는 1번부터 시작
+                }
+                System.out.println((cartList.size()+1) + ". 전체삭제");
+                System.out.println("0. 뒤로가기");
+
+                // 취소 여부 확인
+                System.out.println("어떤 항목을 취소하겠습니까?");
+                int choiceCancle = scanner.nextInt();
+
+                if (choiceCancle == 0) {
+                    System.out.println("카테고리 선택으로 돌아갑니다.");
+                }
+                else if (choiceCancle <= cartList.size()) {
+                    System.out.println(cartList.get(choiceCancle-1) + "가 취소 되었습니다.");
+                    cartList.remove(choiceCancle-1);
+                }
+                else if (choiceCancle == cartList.size()+1) {
+                    System.out.println("전체 취소 되었습니다.");
+                    cartList.clear();
+                }
+                else {
+                    System.out.println("존재하지 않는 항목입니다.");
+                }
+
                 continue;
             }
             else {
-                System.out.println("존재하지 않는 카테고리 입니다.");
+                System.out.println("존재하지 않는 카테고리입니다.");
                 continue;
             }
 
@@ -106,12 +132,12 @@ public class Kiosk {
 
                 if (choiceAdd == 1){
                     // 장바구니에 추가
-                    MenuItem menuItem = menuList.get(choiceCategory-1).getMenu().get(choiceItem - 1);
+                    MenuItem item = menuList.get(choiceCategory-1).getMenu().get(choiceItem - 1);
 
                     // 이미 장바구니에 있다면 수량을 늘림
                     boolean isExist = false;
                     for (Cart c : cartList) {
-                        if (c.getMenuItem().equals(menuItem)) {
+                        if (c.getMenuItem().equals(item)) {
                             c.quantity += 1;
                             isExist = true;
                         }
@@ -119,21 +145,21 @@ public class Kiosk {
 
                     // 장바구니에 없다면 새롭게 추가
                     if (isExist == false) {
-                        cartList.add(new Cart(menuItem, 1));
+                        cartList.add(new Cart(item, 1));
                     }
 
                     // 현재까지 총 주문 금액 합산
-                    totalPrice += menuItem.getPrice();
+                    totalPrice += item.getPrice();
 
                     // 추가된 메뉴 확인 및 현재 장바구니 출력
-                    System.out.println(menuItem.getName() + "가 추가되었습니다.");
+                    System.out.println(item.getName() + "가 추가되었습니다.");
 
-                    System.out.println("[ Cart ]");
+                    System.out.println("[ Orders ]");
                     for (Cart c : cartList) {
                         System.out.println(c);
                     }
                 } else {
-                    System.out.println("취소되었습니다.");
+                    System.out.println("취소 되었습니다.");
                 }
             }
             else {
