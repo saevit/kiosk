@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Kiosk {
     // 속성
     private List<Menu> menuList;
-    private List<Cart> cartList;
+    private List<CartItem> cart;
     int totalPrice;
 
     // 생성자
@@ -20,7 +20,7 @@ public class Kiosk {
         Scanner scanner = new Scanner(System.in);
 
         // 새 장바구니 생성
-        cartList = new ArrayList<>();
+        cart = new ArrayList<>();
         totalPrice = 0;
 
         while (true) {
@@ -34,7 +34,7 @@ public class Kiosk {
             System.out.println("0. 종료     | 종료");
 
             // + 장바구니 카테고리 출력
-            if (cartList.size() > 0) {
+            if (cart.size() > 0) {
                 System.out.println("\n[ ORDER MENU ]");
                 System.out.println((menuList.size()+1) + ". Orders  | 장바구니를 확인 후 주문합니다.");
                 System.out.println((menuList.size()+2) + ". Cancel  | 진행중인 주문을 취소합니다.");
@@ -57,11 +57,11 @@ public class Kiosk {
                 menuList.get(choiceCategory-1).printMenu(); // 카테고리는 1번부터 시작
                 System.out.println("0. 뒤로가기       | 뒤로가기");
             }
-            else if ((cartList.size() > 0) && (choiceCategory == menuList.size()+1)) {
+            else if ((cart.size() > 0) && (choiceCategory == menuList.size()+1)) {
                 // 장바구니 주문
                 // 주문 내역 및 총 금액 출력
                 System.out.println("[ Orders ]");
-                for (Cart c : cartList) {
+                for (CartItem c : cart) {
                     System.out.println(c);
                 }
                 System.out.println("[ Total ]");
@@ -73,18 +73,18 @@ public class Kiosk {
 
                 if (choiceOrder == 1) {
                     System.out.println("주문이 완료되었습니다.");
-                    cartList.clear();
+                    cart.clear();
                 }
                 continue;
             }
-            else if ((cartList.size() > 0) && (choiceCategory == menuList.size()+2)) {
+            else if ((cart.size() > 0) && (choiceCategory == menuList.size()+2)) {
                 // 장바구니 주문 취소
                 // 주문 내역 및 총 금액 출력
                 System.out.println("[ Orders ]");
-                for (int i = 0; i < cartList.size(); i++) {
-                    System.out.println((i + 1) + ". " + cartList.get(i)); // 메뉴는 1번부터 시작
+                for (int i = 0; i < cart.size(); i++) {
+                    System.out.println((i + 1) + ". " + cart.get(i)); // 메뉴는 1번부터 시작
                 }
-                System.out.println((cartList.size()+1) + ". 전체삭제");
+                System.out.println((cart.size()+1) + ". 전체삭제");
                 System.out.println("0. 뒤로가기");
 
                 // 취소 여부 확인
@@ -94,13 +94,13 @@ public class Kiosk {
                 if (choiceCancle == 0) {
                     System.out.println("카테고리 선택으로 돌아갑니다.");
                 }
-                else if (choiceCancle <= cartList.size()) {
-                    System.out.println(cartList.get(choiceCancle-1) + "가 취소 되었습니다.");
-                    cartList.remove(choiceCancle-1);
+                else if (choiceCancle <= cart.size()) {
+                    System.out.println(cart.get(choiceCancle-1) + "가 취소 되었습니다.");
+                    cart.remove(choiceCancle-1);
                 }
-                else if (choiceCancle == cartList.size()+1) {
+                else if (choiceCancle == cart.size()+1) {
                     System.out.println("전체 취소 되었습니다.");
-                    cartList.clear();
+                    cart.clear();
                 }
                 else {
                     System.out.println("존재하지 않는 항목입니다.");
@@ -136,7 +136,7 @@ public class Kiosk {
 
                     // 이미 장바구니에 있다면 수량을 늘림
                     boolean isExist = false;
-                    for (Cart c : cartList) {
+                    for (CartItem c : cart) {
                         if (c.getMenuItem().equals(item)) {
                             c.quantity += 1;
                             isExist = true;
@@ -145,7 +145,7 @@ public class Kiosk {
 
                     // 장바구니에 없다면 새롭게 추가
                     if (isExist == false) {
-                        cartList.add(new Cart(item, 1));
+                        cart.add(new CartItem(item, 1));
                     }
 
                     // 현재까지 총 주문 금액 합산
@@ -155,7 +155,7 @@ public class Kiosk {
                     System.out.println(item.getName() + "가 추가되었습니다.");
 
                     System.out.println("[ Orders ]");
-                    for (Cart c : cartList) {
+                    for (CartItem c : cart) {
                         System.out.println(c);
                     }
                 } else {
