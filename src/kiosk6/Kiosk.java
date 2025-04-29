@@ -108,7 +108,7 @@ public class Kiosk {
             }
             else if (choiceItem <= menuList.get(choiceCategory - 1).getMenuSize()) {
                 // 선택한 메뉴 출력
-                menuList.get(choiceCategory - 1).printSelectedMenu(choiceItem);
+                menuList.get(choiceCategory - 1).printSelectedMenu(choiceItem - 1);
 
                 // 장바구니 추가 여부 확인
                 System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");

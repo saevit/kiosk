@@ -32,7 +32,7 @@ public class Menu {
     }
 
     // 선택한 메뉴만 출력
-    public void printSelectedMenu(int choice) {
-        System.out.println("[선택된 메뉴]" + menu.get(choice - 1)); // 메뉴는 1번부터 시작
+    public void printSelectedMenu(int index) {
+        System.out.println("[선택된 메뉴]" + menu.get(index)); // 메뉴는 1번부터 시작
     }
 }
