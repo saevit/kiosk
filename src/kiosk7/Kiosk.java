@@ -92,6 +92,7 @@ public class Kiosk {
                 // 주문 내역
                 cart.printOrdersWithNumbers();
                 System.out.println((cart.getSize()+1) + ". 전체삭제");
+                System.out.println("9. 입력하여 삭제하기");
                 System.out.println("0. 뒤로가기");
 
                 // 취소 여부 확인
@@ -106,6 +107,14 @@ public class Kiosk {
                 } else if (choiceCancle == cart.getSize()+1) {
                     // 전체 삭제
                     cart.cancleAll();
+                } else if (choiceCancle == 9) {
+                    // 입력 받은 메뉴이름을 삭제
+                    scanner.nextLine();
+                    System.out.println("삭제할 메뉴의 이름을 입력해주세요: ");
+                    String cancleMenuName = scanner.nextLine();
+
+                    cart.cancleWithName(cancleMenuName);
+
                 } else {
                     System.out.println("존재하지 않는 항목입니다.");
                 }

@@ -2,6 +2,7 @@ package kiosk7;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Cart {
     // 속성
@@ -52,6 +53,19 @@ public class Cart {
         System.out.println(cart.get(index) + "가 취소 되었습니다.");
         totalPrice -= cart.get(index).getMenuItem().getPrice();
         cart.remove(index);
+    }
+
+    void cancleWithName(String menuName) {
+        int index = IntStream.range(0, cart.size())
+                .filter(i -> cart.get(i).getMenuItem().getName().equals(menuName))
+                .findFirst()
+                .orElse(-1); // 없으면 -1 반환
+
+        if (index == -1) {
+            System.out.println("장바구니에 해당 메뉴가 존재하지 않습니다.");
+        } else {
+            cancle(index);
+        }
     }
 
     // 장바구니 전체 삭제
