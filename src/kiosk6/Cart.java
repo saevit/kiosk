@@ -41,19 +41,22 @@ public class Cart {
 
     // 장바구니 주문
     void orders() {
-        System.out.println("주문이 완료되었습니다.");
+        System.out.println("주문이 완료되었습니다.주문 금액은 W" + totalPrice + "입니다.");
+        totalPrice = 0;
         cart.clear();
     }
 
     // 장바구니 항목 삭제
     void cancle(int index) {
         System.out.println(cart.get(index) + "가 취소 되었습니다.");
+        totalPrice -= cart.get(index).getMenuItem().getPrice();
         cart.remove(index);
     }
 
     // 장바구니 전체 삭제
     void cancleAll() {
         System.out.println("전체 취소 되었습니다.");
+        totalPrice = 0;
         cart.clear();
     }
 
